@@ -135,12 +135,12 @@ void ImGui_ImplVulkanH_CreateWindowCommandBuffers(VkPhysicalDevice physical_devi
 
 // Vulkan prototypes for use with custom loaders
 // (see description of IMGUI_IMPL_VULKAN_NO_PROTOTYPES in imgui_impl_vulkan.h
-#ifdef VK_NO_PROTOTYPES && IMGUI_IMPL_VULKAN_USE_VOLK
+#if defined(VK_NO_PROTOTYPES) && defined(IMGUI_IMPL_VULKAN_USE_VOLK)
 static bool g_FunctionsLoaded = false;
 #else
 static bool g_FunctionsLoaded = true;
 #endif
-#ifdef VK_NO_PROTOTYPES
+#if defined(VK_NO_PROTOTYPES) && !defined(IMGUI_IMPL_VULKAN_USE_VOLK)
 #define IMGUI_VULKAN_FUNC_MAP(IMGUI_VULKAN_FUNC_MAP_MACRO) \
     IMGUI_VULKAN_FUNC_MAP_MACRO(vkAllocateCommandBuffers) \
     IMGUI_VULKAN_FUNC_MAP_MACRO(vkAllocateDescriptorSets) \
@@ -205,7 +205,7 @@ static bool g_FunctionsLoaded = true;
 #define IMGUI_VULKAN_FUNC_DEF(func) static PFN_##func func;
 IMGUI_VULKAN_FUNC_MAP(IMGUI_VULKAN_FUNC_DEF)
 #undef IMGUI_VULKAN_FUNC_DEF
-#endif // VK_NO_PROTOTYPES
+#endif // VK_NO_PROTOTYPES && IMGUI_IMPL_VULKAN_USE_VOLK
 
 //-----------------------------------------------------------------------------
 // SHADERS
