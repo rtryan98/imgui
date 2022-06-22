@@ -1014,6 +1014,7 @@ void    ImGui_ImplVulkan_DestroyDeviceObjects()
     if (bd->Pipeline)             { vkDestroyPipeline(v->Device, bd->Pipeline, v->Allocator); bd->Pipeline = VK_NULL_HANDLE; }
 }
 
+#ifndef IMGUI_IMPL_VULKAN_USE_VOLK
 bool    ImGui_ImplVulkan_LoadFunctions(PFN_vkVoidFunction(*loader_func)(const char* function_name, void* user_data), void* user_data)
 {
     // Load function pointers
@@ -1034,6 +1035,7 @@ bool    ImGui_ImplVulkan_LoadFunctions(PFN_vkVoidFunction(*loader_func)(const ch
     g_FunctionsLoaded = true;
     return true;
 }
+#endif
 
 bool    ImGui_ImplVulkan_Init(ImGui_ImplVulkan_InitInfo* info, VkRenderPass render_pass)
 {
