@@ -42,7 +42,9 @@
 #if defined(IMGUI_IMPL_VULKAN_NO_PROTOTYPES) && !defined(VK_NO_PROTOTYPES)
 #define VK_NO_PROTOTYPES
 #endif
-#if !defined(IMGUI_IMPL_VULKAN_DONT_PULL_VK_H)
+#if defined(IMGUI_IMPL_VULKAN_USE_VOLK)
+    #include <volk.h>
+#else
     #include <vulkan/vulkan.h>
 #endif
 
